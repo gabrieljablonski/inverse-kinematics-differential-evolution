@@ -38,7 +38,7 @@ const (
 
 func buildFitnessFunction(target vectors.Vector3D, baseSystem rs.System) de.FitnessFunction {
 	return func(agent *arrays.Array1D) float64 {
-		// agent is the theta parameter for each link, one after another
+		// agent is the theta parameters for each link, one after another
 		// example for n links: `agent = [θ0 θ1 ... θn]`
 		baseSystem.UpdateThetas(agent)
 		return baseSystem.ManipulatorPosition().Distance(target)
