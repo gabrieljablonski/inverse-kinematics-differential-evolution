@@ -4,6 +4,7 @@ import (
 	"arrays"
 	"fmt"
 	"math"
+	"utils"
 )
 
 const (
@@ -26,6 +27,13 @@ func NewVector3D(x, y, z float64) Vector3D {
 		Z: z,
 		W: DefaultW,
 	}
+}
+
+func RandomVector3D(constraint utils.Range1D) Vector3D {
+	x := utils.RandomInRange(constraint)
+	y := utils.RandomInRange(constraint)
+	z := utils.RandomInRange(constraint)
+	return NewVector3D(x, y, z)
 }
 
 func (v Vector3D) Distance(otherVector Vector3D) float64 {

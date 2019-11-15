@@ -94,10 +94,10 @@ func main() {
 	//     |z|: z0+0.41
 	// The sum of the coordinates should probably not exceed 0.5
 	//target := vectors.NewVector3D(.1, .1, .1)
-	targetX := 0.4*rand.Float64() - .2
-	targetY := 0.4*rand.Float64() - .2
-	targetZ := 0.4*rand.Float64() - .2
-	target := vectors.NewVector3D(targetX, targetY, targetZ)
+	target := vectors.RandomVector3D(utils.Range1D{
+		LowerBound: -.2,
+		UpperBound:  .2,
+	})
 
 	evolver := de.NewEvolver(de.NewEvolverParams{
 		AgentSize:       baseSystem.Length(),
