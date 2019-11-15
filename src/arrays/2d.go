@@ -56,7 +56,7 @@ func (a *Array2D) NColumns() int {
 }
 
 func (a *Array2D) NElements() int {
-	return a.NRows()*a.NColumns()
+	return a.NRows() * a.NColumns()
 }
 
 func (a *Array2D) Append(v1d *Array1D) {

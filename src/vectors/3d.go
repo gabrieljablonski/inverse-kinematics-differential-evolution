@@ -12,7 +12,7 @@ const (
 
 type Vector3D struct {
 	X, Y, Z float64
-	W float64
+	W       float64
 }
 
 func (v Vector3D) String() string {

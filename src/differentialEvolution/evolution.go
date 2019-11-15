@@ -20,11 +20,11 @@ type Evolver struct {
 	WeightingFactor float64
 	SearchSpace     []utils.Range1D
 	// termination criteria
-	MaxGenerations  int
-	TargetFitness   float64
-	StallPeriod     int
-	StallFactor     float64
-	stallCount      int
+	MaxGenerations int
+	TargetFitness  float64
+	StallPeriod    int
+	StallFactor    float64
+	stallCount     int
 
 	CurrentGeneration  int
 	CurrentBestFitness float64
@@ -51,7 +51,7 @@ func NewEvolver(p NewEvolverParams) Evolver {
 		if len(p.SearchSpace) != 1 {
 			log.Fatalf("Invalid search space")
 		}
-		for i := 0; i < p.AgentSize - 1; i++ {
+		for i := 0; i < p.AgentSize-1; i++ {
 			// repeat the search space given for all agent features
 			p.SearchSpace = append(p.SearchSpace, p.SearchSpace[0])
 		}
@@ -96,6 +96,8 @@ func (e *Evolver) ShouldContinue() bool {
 		log.Print("Target fitness reached.")
 		return false
 	}
+	// if fitness varies in a proportion less than `StallFactor` to the last fitness
+	// for `StallPeriod` times, evolution halts
 	if e.StallPeriod > 0 && e.stallCount >= e.StallPeriod {
 		log.Print("Evolution stalled.")
 		return false

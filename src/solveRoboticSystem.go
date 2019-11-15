@@ -18,13 +18,12 @@ import (
 )
 
 const (
-	NumberOfJoints  = 4
 	PopulationSize  = 15
 	CrossoverRate   = 0.5
 	WeightingFactor = 0.5
 	MaxGenerations  = 2000
 	TargetFitness   = 0.000
-	StallPeriod     = 50     // in generations
+	StallPeriod     = 50  // in generations
 	StallFactor     = 0.1 // 0~1
 )
 
@@ -61,7 +60,7 @@ func main() {
 		rs.DHParameters{
 			D:     0.03,
 			R:     0,
-			Alpha: math.Pi/2.0,
+			Alpha: math.Pi / 2.0,
 		},
 		utils.Range1D{UpperBound: math.Pi})
 	baseSystem.AddLink(
@@ -85,8 +84,8 @@ func main() {
 			Alpha: 0,
 		},
 		utils.Range1D{
-			LowerBound: -math.Pi/2.0,
-			UpperBound: math.Pi/2.0,
+			LowerBound: -math.Pi / 2.0,
+			UpperBound: math.Pi / 2.0,
 		})
 	// Target should have a distance smaller than 0.5 from the base of the system
 	// Maximum values:
@@ -101,7 +100,7 @@ func main() {
 	target := vectors.NewVector3D(targetX, targetY, targetZ)
 
 	evolver := de.NewEvolver(de.NewEvolverParams{
-		AgentSize:       NumberOfJoints,
+		AgentSize:       baseSystem.Length(),
 		PopulationSize:  PopulationSize,
 		CrossoverRate:   CrossoverRate,
 		WeightingFactor: WeightingFactor,

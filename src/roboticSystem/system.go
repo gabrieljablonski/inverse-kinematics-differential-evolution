@@ -8,18 +8,18 @@ import (
 
 type Link struct {
 	DHParameters DHParameters
-	ThetaSpace utils.Range1D
+	ThetaSpace   utils.Range1D
 }
 
 type System struct {
-	BasePosition  vectors.Vector3D
-	Links []Link
+	BasePosition vectors.Vector3D
+	Links        []Link
 }
 
 func NewSystem(x, y, z float64) System {
 	return System{
 		BasePosition: vectors.NewVector3D(x, y, z),
-		Links: []Link{},
+		Links:        []Link{},
 	}
 }
 
