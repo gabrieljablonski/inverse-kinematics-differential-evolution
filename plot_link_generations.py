@@ -46,17 +46,17 @@ def main(filename):
     ax.plot(*zip(target), 'rx', markersize=10)
     colors = 'black', 'red', 'yellow', 'blue'
     link_plots = [
-        ax.plot((), (), (), color=color, linewidth=4, solid_capstyle='round')[0]
-        for color in colors
+        ax.plot((), (), (), color=colors[i % len(colors)], linewidth=4, solid_capstyle='round')[0]
+        for i in range(len(generations[0]))
     ]
     gen = 0
 
     def update_plot(_):
         generation = generations[int(gen_slider.val)-1]
-        link0, *links1_4 = generation
+        link0, *links1_n = generation
         last = link0
 
-        for i, link in enumerate(links1_4):
+        for i, link in enumerate(links1_n):
             x_data, y_data, z_data = zip(last, link)
             link_plots[i].set_xdata(x_data)
             link_plots[i].set_ydata(y_data)
