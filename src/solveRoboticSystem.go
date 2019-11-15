@@ -19,13 +19,13 @@ import (
 
 const (
 	NumberOfJoints  = 4
-	PopulationSize  = 10
+	PopulationSize  = 15
 	CrossoverRate   = 0.5
 	WeightingFactor = 0.5
 	MaxGenerations  = 2000
 	TargetFitness   = 0.000
 	StallPeriod     = 50     // in generations
-	StallFactor     = 0.001  // 0~1
+	StallFactor     = 0.1 // 0~1
 )
 
 // https://en.wikipedia.org/wiki/Ackley_function
