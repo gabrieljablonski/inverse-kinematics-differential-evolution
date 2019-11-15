@@ -24,14 +24,14 @@ def main(filename):
     ax.set_ylim((-.3, .3))
     ax.set_zlim((-.3, .3))
 
-    gen_slider_ax = fig.add_axes([0.2, .95, .13, .03], label='Generation')
+    gen_slider_ax = fig.add_axes([0.2, .95, .13, .03], label='Generation: ')
     gen_slider = Slider(gen_slider_ax,
                         'Generation',
                         1, len(generations),
                         valfmt='%d', valinit=1, valstep=1)
 
     fitness_ax = fig.add_axes([0.2, .88, .13, .03], label='Fitness')
-    fitness_text = TextBox(fitness_ax, '', str('0.00000'))
+    fitness_text = TextBox(fitness_ax, 'Fitness: ', str('0.00000'))
 
     x, y, z = target
     target_text = f"    Target: {x:+.5f} {y:+.5f} {z:+.5f}"
@@ -44,7 +44,7 @@ def main(filename):
                                                             foreground='black')])
 
     ax.plot(*zip(target), 'rx', markersize=10)
-    colors = 'black', 'red', 'yellow', 'blue'
+    colors = 'black', 'red', 'yellow', 'blue', 'purple', 'pink'
     link_plots = [
         ax.plot((), (), (), color=colors[i % len(colors)], linewidth=4, solid_capstyle='round')[0]
         for i in range(len(generations[0]))
