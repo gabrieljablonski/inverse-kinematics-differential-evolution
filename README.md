@@ -32,7 +32,7 @@ Example solutions for random targets, using the 4-link system described above, a
 First clone the repository and `cd` to it with
 
 ``` 
-git clone github.com/gabrieljablonski/robotics-differential-evolution 
+git clone http://github.com/gabrieljablonski/robotics-differential-evolution 
 cd robotics-differential-evolution
 ```
 
