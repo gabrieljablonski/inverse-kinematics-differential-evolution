@@ -20,10 +20,10 @@ func PickRandom(setSize, howMany, exclude int) *[]int {
 	picked := make([]int, howMany)
 	for i := range picked {
 		for {
-			agentNumber := rand.Intn(setSize)
-			if agentNumber != exclude && !alreadyPicked[agentNumber] {
-				picked[i] = agentNumber
-				alreadyPicked[agentNumber] = true
+			pick := rand.Intn(setSize)
+			if pick != exclude && !alreadyPicked[pick] {
+				picked[i] = pick
+				alreadyPicked[pick] = true
 				break
 			}
 		}
