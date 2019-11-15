@@ -43,7 +43,7 @@ The program can the be built and run with
 go run src/solveRoboticSystem.go [<output file>]
 ```
 
-The optional `output file` parameter can be used to change the name of the output file containing the target and best agent for each generation. Make sure to run it from the same directory as the [`plot_link_generations.py`][plot_link_generations.py] script to be able to plot the results.
+The optional `output file` parameter can be used to change the name of the output file containing the target and best agent for each generation. Make sure to run it from the same directory as the [`plot_link_generations.py`](plot_link_generations.py) script to be able to plot the results.
 
 
 [DE]: https://en.wikipedia.org/wiki/Differential_evolution
