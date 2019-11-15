@@ -5,10 +5,6 @@ import (
 	"math"
 )
 
-const (
-	NDH = 4 // number of DH parameters
-)
-
 // https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters
 type DHParameters struct {
 	Theta float64
