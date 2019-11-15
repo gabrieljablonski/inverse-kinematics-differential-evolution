@@ -7,7 +7,7 @@ The implementation is generic enough to be able to optimize for any features of 
 
 An example of a robotic system with four links is given below.
 
-![robotic system with four links](robotic_system.png)
+![robotic system with four links](resources/robotic_system.png)
 
 <center>
  
@@ -23,8 +23,8 @@ An example of a robotic system with four links is given below.
 Example solutions for random targets, using the 4-link system described above, and another one with 2 more links added, for a total of 6 links:
 
 <p align="center">
-  <img width=400 src="four_links.gif">
-  <img width=400 src="six_links.gif">
+  <img width=400 src="resources/four_links.gif">
+  <img width=400 src="resources/six_links.gif">
 </p>
 
 ## Building and Running
@@ -36,7 +36,7 @@ git clone github.com/gabrieljablonski/robotics-differential-evolution
 cd robotics-differential-evolution
 ```
 
-The main source file is `solveRoboticSystem.go`. Before running, you may want to make adjustments to the robotic system (`System.AddLinks()`), the target point, and the differential evolution parameters.
+The main source file is [`solveRoboticSystem.go`](src/solveRoboticSystem.go). Before running, you may want to make adjustments to the robotic system (`System.AddLinks()`), the target point, and the differential evolution parameters.
 
 The program can the be built and run with
 
@@ -44,7 +44,7 @@ The program can the be built and run with
 go run src/solveRoboticSystem.go [<output file>]
 ```
 
-The optional `output file` parameter can be used to change the name of the output file containing the target and best agent for each generation. Make sure to run it from the same directory as the `plot_link_generations.py` script to be able to plot the results.
+The optional `output file` parameter can be used to change the name of the output file containing the target and best agent for each generation. Make sure to run it from the same directory as the [`plot_link_generations.py`][plot_link_generations.py] script to be able to plot the results.
 
 
 [DE]: https://en.wikipedia.org/wiki/Differential_evolution
