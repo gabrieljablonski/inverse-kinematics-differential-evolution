@@ -1,5 +1,4 @@
 # Differential Evolution in Robotics
- Use of Differential Evolution to evaluate a 3D robotic system with several links
 
 This implementation makes use of [Differential Evolution][DE] for the analysis of generic robotic systems in three-dimensional space, with its links described by [Denavit-Hartenberg parameters][DH]. The optimization (fitness function) takes into account the euclidean distance from the manipulator (extremity of last link) to a target point in space.
 
@@ -32,7 +31,7 @@ Example solutions for random targets, using the 4-link system described above, a
 First clone the repository and `cd` to it with
 
 ``` 
-git clone github.com/gabrieljablonski/robotics-differential-evolution 
+git clone http://github.com/gabrieljablonski/robotics-differential-evolution 
 cd robotics-differential-evolution
 ```
 
