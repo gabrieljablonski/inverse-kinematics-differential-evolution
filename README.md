@@ -7,9 +7,7 @@ The implementation is generic enough to be able to optimize for any features of 
 
 An example of a robotic system with four links is given below.
 
-<p align="center">
-  <img src="robotic_system.png">
-</p>
+![robotic system with four links](robotic_system.png)
 
 <center>
  
