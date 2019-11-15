@@ -133,15 +133,15 @@ func (e *Evolver) mutate(referenceAgentNumber int) *arrays.Array1D {
 }
 
 func (e *Evolver) crossover(referenceAgent, mutatedAgent *arrays.Array1D) *arrays.Array1D {
-	newAgent := referenceAgent.Copy()
+	crossed := referenceAgent.Copy()
 	randomIndex := rand.Intn(e.AgentSize)
 	for i := range referenceAgent.Items() {
 		ri := rand.Float64()
 		if ri <= e.CrossoverRate || i == randomIndex {
-			newAgent.Set(i, mutatedAgent.Get(i))
+			crossed.Set(i, mutatedAgent.Get(i))
 		} // else keep reference agent value
 	}
-	return newAgent
+	return crossed
 }
 
 func (e *Evolver) mutateAndCrossover(referenceAgentNumber int) *arrays.Array1D {
