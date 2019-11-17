@@ -120,9 +120,9 @@ func (e *Evolver) mutate(referenceAgentNumber int) *arrays.Array1D {
 	r1, r2, r3 := e.pickRandomAgents(referenceAgentNumber)
 	// Compute v = x[r1] + F*(x[r3] - x[r2])
 	// in which
-	// 	   `v` is the mutated value
+	//     `v` is the mutated value
 	//     `x` is the agent population
-	//	   `x[ri]` is the i-th random agent
+	//     `x[ri]` is the i-th random agent
 	//     `F` is the weighting factor
 	mutated := r1.Add((r3.Subtract(&r2)).MultiplyByConstant(e.WeightingFactor))
 	// ensure the mutated values are within the search space
