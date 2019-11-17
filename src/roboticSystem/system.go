@@ -83,9 +83,8 @@ func (s *System) LinkPositions() []vectors.Vector3D {
 }
 
 func (s *System) ManipulatorPosition() vectors.Vector3D {
-	point := vectors.NewVector3D(0, 0, 0)
 	transformationMatrix := ParametersToTransformationMatrix(s.DHParameters())
-	return point.Transform(transformationMatrix)
+	return s.BasePosition.Transform(transformationMatrix)
 }
 
 //func SystemFromArray1D(array *arrays.Array1D) System {
