@@ -134,7 +134,7 @@ func (e *Evolver) mutate(referenceAgentNumber int) *arrays.Array1D {
 
 func (e *Evolver) crossover(referenceAgent, mutatedAgent *arrays.Array1D) *arrays.Array1D {
 	crossed := referenceAgent.Copy()
-	randomIndex := rand.Intn(e.AgentSize)
+	randomIndex := rand.Intn(e.AgentSize) // random index so at least one feature gets crossed
 	for i := range referenceAgent.Items() {
 		ri := rand.Float64()
 		if ri <= e.CrossoverRate || i == randomIndex {
