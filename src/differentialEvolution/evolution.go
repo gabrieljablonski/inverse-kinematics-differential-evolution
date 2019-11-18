@@ -177,7 +177,9 @@ func (e *Evolver) Evolve() error {
 		}
 	}
 	e.Population = newPopulation
-	if lastBestFitness-e.CurrentBestFitness <= lastBestFitness*e.StallFactor {
+
+	fitnessImprovementRatio := (lastBestFitness-e.CurrentBestFitness)/lastBestFitness
+	if fitnessImprovementRatio <= e.StallFactor {
 		e.stallCount++
 	} else {
 		e.stallCount = 0
