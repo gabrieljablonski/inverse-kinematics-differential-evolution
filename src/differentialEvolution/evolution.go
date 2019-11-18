@@ -167,6 +167,7 @@ func (e *Evolver) Evolve() error {
 	if e.Population == nil {
 		return fmt.Errorf("population not initialized")
 	}
+	newPopulation := e.Population.Copy()
 	lastBestFitness := e.CurrentBestFitness
 	for i := range e.Population.Items() {
 		newAgent, fitness := e.tryReplaceAgent(i)
@@ -176,6 +177,7 @@ func (e *Evolver) Evolve() error {
 			e.CurrentBestAgent = newAgent
 		}
 	}
+	e.Population = newPopulation
 	if lastBestFitness-e.CurrentBestFitness <= lastBestFitness*e.StallFactor {
 		e.stallCount++
 	} else {
