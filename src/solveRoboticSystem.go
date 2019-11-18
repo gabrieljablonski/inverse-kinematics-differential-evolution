@@ -25,6 +25,8 @@ const (
 	TargetFitness   = 0.000
 	StallPeriod     = 20  // in generations
 	StallFactor     = 0.001 // 0~1
+	// this can be read as:
+	// if the fitness improvement ratio is less than `StallFactor` for `StallPeriod` times in a row, halt evolution
 )
 
 // https://en.wikipedia.org/wiki/Ackley_function
@@ -125,6 +127,7 @@ func main() {
 		log.Printf("Position: %s", baseSystem.ManipulatorPosition())
 		log.Printf("Fitness: %.3f", evolver.CurrentBestFitness)
 	}
+	log.Printf("Target was: %s", target.String())
 	output := make([]string, len(bestAgentLinkPositions)+1)
 	output[0] = target.String()
 	for i, generation := range bestAgentLinkPositions {
