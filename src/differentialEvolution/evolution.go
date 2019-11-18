@@ -170,7 +170,7 @@ func (e *Evolver) Evolve() error {
 	lastBestFitness := e.CurrentBestFitness
 	for i := range e.Population.Items() {
 		newAgent, fitness := e.tryReplaceAgent(i)
-		e.Population.SetRow(i, *newAgent)
+		newPopulation.SetRow(i, *newAgent)
 		if fitness <= e.CurrentBestFitness {
 			e.CurrentBestFitness = fitness
 			e.CurrentBestAgent = newAgent
