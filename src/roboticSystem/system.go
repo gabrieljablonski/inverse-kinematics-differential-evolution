@@ -2,6 +2,7 @@ package roboticSystem
 
 import (
 	"arrays"
+	"fmt"
 	"utils"
 	"vectors"
 )
@@ -32,6 +33,23 @@ func (s *System) AddLink(dh DHParameters, space utils.Range1D) {
 		DHParameters: dh,
 		ThetaSpace:   space,
 	})
+}
+
+func (s *System) AddLinks(dhs []DHParameters, spaces []utils.Range1D) error {
+	if len(dhs) != len(spaces) && len(spaces) != 1 {
+		msg := "invalid number of spaces for values. should be equal to number of parameter groups given, or 1"
+		return fmt.Errorf(msg)
+	}
+	for i := range dhs {
+		var space utils.Range1D
+		if len(spaces) == 1 {
+			space = spaces[0]
+		} else {
+			space = spaces[i]
+		}
+		s.AddLink(dhs[i], space)
+	}
+	return nil
 }
 
 func (s *System) SetTheta(link int, theta float64) {
