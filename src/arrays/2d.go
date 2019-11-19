@@ -78,11 +78,19 @@ func (a *Array2D) GetValue(row, col int) float64 {
 }
 
 func (a *Array2D) SetRow(position int, value Array1D) {
-	*a.GetRow(position) = value
+	if row := a.GetRow(position); row != nil {
+		*row = value
+	} else {
+		(*a)[position] = &value
+	}
 }
 
-func (a *Array2D) SetValue(row, col int, value float64) {
-	a.GetRow(row).Set(col, value)
+func (a *Array2D) SetValue(rown, coln int, value float64) error {
+	if row := a.GetRow(rown); row != nil {
+		row.Set(coln, value)
+		return nil
+	}
+	return fmt.Errorf("row %d is nil", rown)
 }
 
 func (a *Array2D) Multiply(otherArray *Array2D) *Array2D {
