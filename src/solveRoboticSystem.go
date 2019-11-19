@@ -55,6 +55,36 @@ func buildFitnessFunction(target vectors.Vector3D, baseSystem rs.System) de.Fitn
 //	return searchSpace
 //}
 
+func saveOutputToFile(output []string) string {
+	var filename string
+	if len(os.Args) == 1 {
+		filename = "example_output.txt"
+	} else {
+		filename = os.Args[1]
+	}
+	err := ioutil.WriteFile(filename, []byte(strings.Join(output, "\n")), 0644)
+	if err != nil {
+		log.Fatalf("%#v", err)
+	}
+	return filename
+}
+
+func runPlottingScript(filename string) {
+	var python string
+	if runtime.GOOS == "windows" {
+		python = "python"
+	} else {
+		python = "python3"
+	}
+	scriptName := "plot_link_generations.py"
+	cmd := exec.Command(python, scriptName, filename)
+	err := cmd.Run()
+
+	if err != nil {
+		log.Fatalf("%#v", err)
+	}
+}
+
 func main() {
 	rand.Seed(time.Now().Unix())
 	baseSystem := rs.NewSystem(0, 0, 0)
@@ -148,29 +178,8 @@ func main() {
 		output[i+1] = strings.Join(line, "\t")
 	}
 
-	var filename string
-	if len(os.Args) == 1 {
-		filename = "example_output.txt"
-	} else {
-		filename = os.Args[1]
-	}
-	err := ioutil.WriteFile(filename, []byte(strings.Join(output, "\n")), 0644)
-	if err != nil {
-		log.Print(err)
-	}
-	var python string
-	if runtime.GOOS == "windows" {
-		python = "python"
-	} else {
-		python = "python3"
-	}
-	scriptName := "plot_link_generations.py"
-	cmd := exec.Command(python, scriptName, filename)
-	err = cmd.Run()
-
-	if err != nil {
-		log.Fatalf("%#v", err)
-	}
+	filename := saveOutputToFile(output)
+	runPlottingScript(filename)
 
 	//delta := math.Pi/20.0
 	//var positions []vectors.Vector3D
