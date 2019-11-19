@@ -58,37 +58,47 @@ func buildFitnessFunction(target vectors.Vector3D, baseSystem rs.System) de.Fitn
 func main() {
 	rand.Seed(time.Now().Unix())
 	baseSystem := rs.NewSystem(0, 0, 0)
-	baseSystem.AddLink(
-		rs.DHParameters{
+
+	parameters := []rs.DHParameters{
+		{
 			D:     0.03,
 			R:     0,
 			Alpha: math.Pi / 2.0,
 		},
-		utils.Range1D{UpperBound: math.Pi})
-	baseSystem.AddLink(
-		rs.DHParameters{
+		{
 			D:     0,
 			R:     0.1,
 			Alpha: 0,
 		},
-		utils.Range1D{UpperBound: math.Pi})
-	baseSystem.AddLink(
-		rs.DHParameters{
+		{
 			D:     0,
 			R:     0.1,
 			Alpha: 0,
 		},
-		utils.Range1D{LowerBound: -math.Pi})
-	baseSystem.AddLink(
-		rs.DHParameters{
+		{
 			D:     0,
 			R:     0.18,
 			Alpha: 0,
 		},
-		utils.Range1D{
+	}
+	searchSpaces := []utils.Range1D{
+		{
+			UpperBound: math.Pi,
+		},
+		{
+			UpperBound: math.Pi,
+		},
+		{
+			LowerBound: -math.Pi,
+		},
+		{
 			LowerBound: -math.Pi / 2.0,
 			UpperBound: math.Pi / 2.0,
-		})
+		},
+	}
+	if err := baseSystem.AddLinks(parameters, searchSpaces); err != nil {
+		log.Fatalf("%#v", err)
+	}
 	// Target should have a distance smaller than 0.5 from the base of the system
 	// Maximum values:
 	//     |x|: x0+0.38
@@ -161,6 +171,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("%#v", err)
 	}
+
 	//delta := math.Pi/20.0
 	//var positions []vectors.Vector3D
 	//for t1 := searchSpace[0].LowerBound; t1 <= searchSpace[0].UpperBound; t1 += delta {
