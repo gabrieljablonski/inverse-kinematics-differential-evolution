@@ -55,6 +55,16 @@ func buildFitnessFunction(target vectors.Vector3D, baseSystem rs.System) de.Fitn
 //	return searchSpace
 //}
 
+func getFileName() string {
+	var filename string
+	if len(os.Args) == 1 {
+		filename = "example_output.txt"
+	} else {
+		filename = os.Args[1]
+	}
+	return filename
+}
+
 func saveOutputToFile(filename string, output []string) string {
 	err := ioutil.WriteFile(filename, []byte(strings.Join(output, "\n")), 0644)
 	if err != nil {
@@ -172,15 +182,9 @@ func main() {
 		output[i+1] = strings.Join(line, "\t")
 	}
 
-	var filename string
-	if len(os.Args) == 1 {
-		filename = "example_output.txt"
-	} else {
-		filename = os.Args[1]
-	}
-
+	filename := getFileName()
 	saveOutputToFile(filename, output)
-	runPlottingScript(filename)
+	//runPlottingScript(filename)
 
 	//delta := math.Pi/20.0
 	//var positions []vectors.Vector3D
