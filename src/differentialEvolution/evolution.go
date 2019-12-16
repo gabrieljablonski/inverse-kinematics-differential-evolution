@@ -9,6 +9,11 @@ import (
 	"utils"
 )
 
+type AgentFitnessPair struct {
+	Agent   *arrays.Array1D
+	Fitness float64
+}
+
 // evolution optimizes fitness to 0
 type FitnessFunction func(agent *arrays.Array1D) float64
 
@@ -150,16 +155,16 @@ func (e *Evolver) mutateAndCrossover(referenceAgentNumber int) *arrays.Array1D {
 	return crossed
 }
 
-func (e *Evolver) tryReplaceAgent(referenceAgentNumber int) (newAgent *arrays.Array1D, fitness float64) {
+func (e *Evolver) tryReplaceAgent(referenceAgentNumber int, resultChannel chan AgentFitnessPair) {
 	referenceAgent := e.Population.GetRow(referenceAgentNumber).Copy()
 	crossed := e.mutateAndCrossover(referenceAgentNumber)
 
 	referenceFitness := e.FitnessFunction(referenceAgent)
 	crossedFitness := e.FitnessFunction(crossed)
 	if crossedFitness <= referenceFitness {
-		return crossed, crossedFitness
+		resultChannel <- AgentFitnessPair{crossed, crossedFitness}
 	}
-	return referenceAgent, referenceFitness
+	resultChannel <- AgentFitnessPair{referenceAgent, referenceFitness}
 }
 
 func (e *Evolver) Evolve() error {
@@ -167,9 +172,16 @@ func (e *Evolver) Evolve() error {
 		return fmt.Errorf("population not initialized")
 	}
 	newPopulation := make(arrays.Array2D, e.PopulationSize)
+	newPopulationChannel := make(chan AgentFitnessPair)
 	lastBestFitness := e.CurrentBestFitness
+
 	for i := range e.Population.Items() {
-		newAgent, fitness := e.tryReplaceAgent(i)
+		go e.tryReplaceAgent(i, newPopulationChannel)
+	}
+
+	for i := 0; i < e.PopulationSize; i++ {
+		pair := <-newPopulationChannel
+		newAgent, fitness := pair.Agent, pair.Fitness
 		newPopulation.SetRow(i, *newAgent)
 		if fitness <= e.CurrentBestFitness {
 			e.CurrentBestFitness = fitness
@@ -177,7 +189,6 @@ func (e *Evolver) Evolve() error {
 		}
 	}
 	e.Population = &newPopulation
-
 	fitnessImprovementRatio := (lastBestFitness-e.CurrentBestFitness)/lastBestFitness
 	if fitnessImprovementRatio <= e.StallFactor {
 		e.stallCount++
