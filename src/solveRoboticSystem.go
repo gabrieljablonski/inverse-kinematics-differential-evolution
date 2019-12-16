@@ -115,7 +115,7 @@ func main() {
 			Alpha: 0,
 		},
 	}
-	searchSpaces := []utils.Range1D{
+	valueSpaces := []utils.Range1D{
 		{
 			UpperBound: math.Pi,
 		},
@@ -130,7 +130,7 @@ func main() {
 			UpperBound: math.Pi / 2.0,
 		},
 	}
-	if err := baseSystem.AddLinks(parameters, searchSpaces); err != nil {
+	if err := baseSystem.AddLinks(parameters, valueSpaces); err != nil {
 		log.Fatalf("%#v", err)
 	}
 	// Target should have a distance smaller than 0.5 from the base of the system
@@ -184,7 +184,7 @@ func main() {
 
 	filename := getFileName()
 	saveOutputToFile(filename, output)
-	//runPlottingScript(filename)
+	runPlottingScript(filename)
 
 	//delta := math.Pi/20.0
 	//var positions []vectors.Vector3D
