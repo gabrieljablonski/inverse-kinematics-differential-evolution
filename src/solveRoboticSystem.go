@@ -18,13 +18,13 @@ import (
 )
 
 const (
-	PopulationSize  = 15
+	PopulationSize  = 100
 	CrossoverRate   = 0.5
 	WeightingFactor = 0.5
 	MaxGenerations  = 2000
 	TargetFitness   = 0.000
-	StallPeriod     = 20  // in generations
-	StallFactor     = 0.001 // 0~1
+	StallPeriod     = 500  // in generations
+	StallFactor     = 0.00000 // 0~1
 	// this can be read as:
 	// if the fitness improvement ratio is less than `StallFactor` for `StallPeriod` times in a row, halt evolution
 )
@@ -76,7 +76,7 @@ func saveOutputToFile(filename string, output []string) string {
 func runPlottingScript(filename string) {
 	var python string
 	if runtime.GOOS == "windows" {
-		python = "python"
+		python = "D:\\GitReps\\robotics-differential-evolution\\venv\\Scripts\\python.exe"
 	} else {
 		python = "python3"
 	}
