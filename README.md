@@ -1,4 +1,4 @@
-# Differential Evolution in Robotics
+# Differential Evolution in Robotics - Inverse Kinematics
 
 This implementation makes use of [Differential Evolution][DE] for the analysis of generic robotic systems in three-dimensional space, with its links described by [Denavit-Hartenberg parameters][DH]. The optimization (fitness function) takes into account the euclidean distance from the manipulator (extremity of last link) to a target point in space.
 
