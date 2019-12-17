@@ -18,13 +18,13 @@ import (
 )
 
 const (
-	PopulationSize  = 100
+	PopulationSize  = 10
 	CrossoverRate   = 0.5
 	WeightingFactor = 0.5
 	MaxGenerations  = 2000
 	TargetFitness   = 0.000
-	StallPeriod     = 500  // in generations
-	StallFactor     = 0.00000 // 0~1
+	StallPeriod     = 50  // in generations
+	StallFactor     = 0.0001 // 0~1
 	// this can be read as:
 	// if the fitness improvement ratio is less than `StallFactor` for `StallPeriod` times in a row, halt evolution
 )
@@ -141,10 +141,9 @@ func main() {
 	// The sum of the coordinates should probably not exceed 0.5
 	//target := vectors.NewVector3D(.1, .1, .1)
 	target := vectors.RandomVector3D(utils.Range1D{
-		LowerBound: -.2,
-		UpperBound:  .2,
+		LowerBound: -.3,
+		UpperBound:  .3,
 	})
-
 	evolver := de.NewEvolver(de.NewEvolverParams{
 		AgentSize:       baseSystem.Length(),
 		PopulationSize:  PopulationSize,

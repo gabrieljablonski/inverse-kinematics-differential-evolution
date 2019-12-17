@@ -161,10 +161,14 @@ func (e *Evolver) tryReplaceAgent(referenceAgentNumber int, resultChannel chan A
 
 	referenceFitness := e.FitnessFunction(referenceAgent)
 	crossedFitness := e.FitnessFunction(crossed)
+
+	var result AgentFitnessPair
 	if crossedFitness <= referenceFitness {
-		resultChannel <- AgentFitnessPair{crossed, crossedFitness}
+		result = AgentFitnessPair{crossed, crossedFitness}
+	} else {
+		result = AgentFitnessPair{referenceAgent, referenceFitness}
 	}
-	resultChannel <- AgentFitnessPair{referenceAgent, referenceFitness}
+	resultChannel <- result
 }
 
 func (e *Evolver) Evolve() error {
